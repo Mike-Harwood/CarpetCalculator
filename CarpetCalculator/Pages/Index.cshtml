@@ -1,63 +1,54 @@
 ﻿@page
 @model IndexModel
+@using CarpetCalculator.Model
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="card" style=" margin-top: 20px">
-    <div class="carpet Calculator">
+    <div class="card-header">
+        <h1>Carpet Calculator </h1>
     </div>
     <div class="card-body">
-        <h1>Carpet Cost Calculator</h1>
-
-
         <form method="post">
             <div class="form-group">
                 <div class="row">
-                    <h4>Enter Room Details</h4>
-                    <label asp-for="RoomWidth" class="col-lg-2"></label>
-                    <input type="number" asp-for="RoomWidth" class="col-lg-2" />
-                    <label asp-for="RoomLength" class="col-lg-2"></label>
-                    <input type="number" asp-for="RoomLength" class="col-lg-2" />
-
-
-
-                    <!-- Access operations data from the back end /pagemodel-->
-                    <!-- answer gets passed back to what we choose-->   <!-- this is all the ones we are actually choosing-->
-                    <label asp-for="CarpetOperationSelection" asp-items="@Model.CarpetOperations" class="col-lg-4">
-                        <select asp-for="CarpetOperationSelection" asp-items="@Model.CarpetOperations" class="col-lg-4"></select>
-                    </label>
-
-                </div>
-                <br />
-                <div>
-                    <h4>Choose Installation Details</h4>
-                    <label asp-for="isUnderlay" class="col-lg-2"></label>
-                    <input type="number" asp-for="isUnderlay" class="col-lg-2" />
-                    <label asp-for="isInstalled" class="col-lg-2"></label>
-                    <input type="number" asp-for="isInstalled" class="col-lg-2" />
-
+                    <label asp-for="carpetObject.RoomWidth" class="col-lg-2"></label>
+                    <input type="number" asp-for="carpetObject.RoomWidth" class="col-lg-2" step="0.1" />
                 </div>
                 <div class="row">
-                    <input class="col-lg-2" type="submit" value="Submit" asp-actions="Index" />
+                    <label asp-for="carpetObject.RoomLength" class="col-lg-2"></label>
+                    <input type="number" asp-for="carpetObject.RoomLength" class="col-lg-2" step="0.1" />
+                </div>
+
+                <div class="row">
+                    <label asp-for="carpetObject.IsUnderlay" class="col-lg-2"></label>
+                    <input type="checkbox" asp-for="carpetObject.IsUnderlay" class="col-lg-2" />
+                </div>
+
+                <div class="row">
+                    <label asp-for="carpetObject.IsInstall" class="col-lg-2 text-danger"></label>
+                    <input type="checkbox" asp-for="carpetObject.IsInstall" class="col-lg-2" />
+                </div>
+
+                <label asp-for="carpetObject.CarpetSelection"></label>
+                <select asp-for="carpetObject.CarpetChoice" asp-items="Model.carpetObject.CarpetSelection">
+                    <option selected="selected" value="Choose Carpet"></option>
+                </select>
+
+                <div class="row">
+                    <input type="submit" value="Submit" asp-action="Index" />
                 </div>
             </div>
         </form>
     </div>
-
-
-
-
     <div class="card-footer">
-        <h3>Total Carpet Cost</h3>
 
         <div class="row">
-
-            <label asp-for="Result"> </label>
-            <input asp-for="Result" type="Number" name="Result" disabled="disabled" class="col-lg-2" />
-            <!--<label asp-for="Result">*@@Model.RoomWidth + 8@@Model.RoomLength =  8@@Model.Result   </label>-->
-
-
+            <label asp-for="carpetObject.Result" class="col-lg-2"></label>
+            <input type="number" disabled="disabled" class="col-lg-2" asp-for="carpetObject.Result" />
         </div>
     </div>
+
 </div>
+
